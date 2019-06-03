@@ -25,7 +25,7 @@ it('BasicAuthFields renders with blank inputs', () => {
     invalidFields: []
   };
   const { getByLabelText, getAllByDisplayValue } = render(<BasicAuthFields {...props} />);
-  expect(getByLabelText(/Username/i)).toBeTruthy();
+  expect(getByLabelText(/Email/i)).toBeTruthy();
   expect(getByLabelText(/Password\/Token/i)).toBeTruthy();
   expect(getByLabelText(/Service Account/i)).toBeTruthy();
   expect(getAllByDisplayValue('').length === 3).toBeTruthy();

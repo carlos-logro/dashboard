@@ -24,40 +24,25 @@ const mockStore = configureStore(middleware);
 
 it('SecretsModal renders blank', () => {
   const props = {
-    namespaces: [
-      'default',
-      'docker',
-      'kube-public',
-      'kube-system',
-      'tekton-pipelines'
-    ],
     open: true
   };
 
-  const secrets= {
+  const secrets = {
     byId: {},
     byNamespace: {},
     errorMessage: null,
     isFetching: false
-  }
+  };
 
-  const namespaces= {
+  const namespaces = {
     byName: {
-      'default': {
+      default: {
         metadata: {
           name: 'default',
           selfLink: '/api/v1/namespaces/default',
           uid: '32b35d3b-6ce1-11e9-af21-025000000001',
           resourceVersion: '4',
           creationTimestamp: '2019-05-02T13:50:08Z'
-        },
-        spec: {
-          finalizers: [
-            'kubernetes'
-          ]
-        },
-        status: {
-          phase: 'Active'
         }
       },
       docker: {
@@ -67,14 +52,6 @@ it('SecretsModal renders blank', () => {
           uid: '571796bd-6ce1-11e9-af21-025000000001',
           resourceVersion: '413',
           creationTimestamp: '2019-05-02T13:51:09Z'
-        },
-        spec: {
-          finalizers: [
-            'kubernetes'
-          ]
-        },
-        status: {
-          phase: 'Active'
         }
       },
       'kube-public': {
@@ -84,14 +61,6 @@ it('SecretsModal renders blank', () => {
           uid: '351f8763-6ce1-11e9-af21-025000000001',
           resourceVersion: '31',
           creationTimestamp: '2019-05-02T13:50:12Z'
-        },
-        spec: {
-          finalizers: [
-            'kubernetes'
-          ]
-        },
-        status: {
-          phase: 'Active'
         }
       },
       'kube-system': {
@@ -101,14 +70,6 @@ it('SecretsModal renders blank', () => {
           uid: '33426195-6ce1-11e9-af21-025000000001',
           resourceVersion: '12',
           creationTimestamp: '2019-05-02T13:50:09Z'
-        },
-        spec: {
-          finalizers: [
-            'kubernetes'
-          ]
-        },
-        status: {
-          phase: 'Active'
         }
       },
       'tekton-pipelines': {
@@ -119,27 +80,18 @@ it('SecretsModal renders blank', () => {
           resourceVersion: '12915',
           creationTimestamp: '2019-05-02T18:33:47Z',
           annotations: {
-            'kubectl.kubernetes.io/last-applied-configuration': '{"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"tekton-pipelines"}}\n'
+            'kubectl.kubernetes.io/last-applied-configuration':
+              '{"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"tekton-pipelines"}}\n'
           }
-        },
-        spec: {
-          finalizers: [
-            'kubernetes'
-          ]
-        },
-        status: {
-          phase: 'Active'
         }
       }
     },
     errorMessage: null,
     isFetching: false,
     selected: 'default'
-  }
+  };
 
-  jest
-    .spyOn(API, 'getNamespaces')
-    .mockImplementation(() => []);
+  jest.spyOn(API, 'getNamespaces').mockImplementation(() => []);
 
   const store = mockStore({
     secrets,
@@ -153,4 +105,99 @@ it('SecretsModal renders blank', () => {
   expect(queryByText('Create Secret')).toBeTruthy();
   expect(queryByText('Close')).toBeTruthy();
   expect(queryByText('Submit')).toBeTruthy();
+});
+
+it('Test SecretsModal click events', () => {
+  const handleNew = jest.fn();
+  const handleSubmit = jest.fn();
+  const props = {
+    open: true,
+    handleNew
+  };
+
+  const secrets = {
+    byId: {},
+    byNamespace: {},
+    errorMessage: null,
+    isFetching: false
+  };
+
+  const namespaces = {
+    byName: {
+      default: {
+        metadata: {
+          name: 'default',
+          selfLink: '/api/v1/namespaces/default',
+          uid: '32b35d3b-6ce1-11e9-af21-025000000001',
+          resourceVersion: '4',
+          creationTimestamp: '2019-05-02T13:50:08Z'
+        }
+      },
+      docker: {
+        metadata: {
+          name: 'docker',
+          selfLink: '/api/v1/namespaces/docker',
+          uid: '571796bd-6ce1-11e9-af21-025000000001',
+          resourceVersion: '413',
+          creationTimestamp: '2019-05-02T13:51:09Z'
+        }
+      },
+      'kube-public': {
+        metadata: {
+          name: 'kube-public',
+          selfLink: '/api/v1/namespaces/kube-public',
+          uid: '351f8763-6ce1-11e9-af21-025000000001',
+          resourceVersion: '31',
+          creationTimestamp: '2019-05-02T13:50:12Z'
+        }
+      },
+      'kube-system': {
+        metadata: {
+          name: 'kube-system',
+          selfLink: '/api/v1/namespaces/kube-system',
+          uid: '33426195-6ce1-11e9-af21-025000000001',
+          resourceVersion: '12',
+          creationTimestamp: '2019-05-02T13:50:09Z'
+        }
+      },
+      'tekton-pipelines': {
+        metadata: {
+          name: 'tekton-pipelines',
+          selfLink: '/api/v1/namespaces/tekton-pipelines',
+          uid: 'd30b0dbf-6d08-11e9-af21-025000000001',
+          resourceVersion: '12915',
+          creationTimestamp: '2019-05-02T18:33:47Z',
+          annotations: {
+            'kubectl.kubernetes.io/last-applied-configuration':
+              '{"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"tekton-pipelines"}}\n'
+          }
+        }
+      }
+    },
+    errorMessage: null,
+    isFetching: false,
+    selected: 'default'
+  };
+
+  jest.spyOn(API, 'getNamespaces').mockImplementation(() => []);
+
+  const store = mockStore({
+    secrets,
+    namespaces
+  });
+
+  const { queryByText, rerender } = render(
+    <Provider store={store}>
+      <SecretsModal {...props} />
+    </Provider>
+  );
+  fireEvent.click(queryByText('Close'));
+  expect(handleNew).toHaveBeenCalledTimes(1);
+  rerender(
+    <Provider store={store}>
+      <SecretsModal open={false} />
+    </Provider>
+  );
+  fireEvent.click(queryByText('Submit'));
+  expect(handleSubmit).toHaveBeenCalledTimes(0);
 });

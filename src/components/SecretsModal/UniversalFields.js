@@ -30,7 +30,7 @@ const UniversalFields = props => {
       <TextInput
         id="name"
         data-testid="name"
-        placeholder=""
+        placeholder="secret-name"
         value={name}
         labelText="Name:"
         onChange={handleChange}

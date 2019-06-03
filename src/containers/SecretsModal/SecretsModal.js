@@ -118,7 +118,7 @@ export /* istanbul ignore next */ class SecretsModal extends Component {
 
   handleChange = e => {
     const { id, value } = e.target;
-    this.setState(function(prevState) {
+    this.setState(prevState => {
       const newInvalidFields = prevState.invalidFields;
       const idIndex = newInvalidFields.indexOf(id);
       if (validateK8sResources(value, id)) {
@@ -143,7 +143,7 @@ export /* istanbul ignore next */ class SecretsModal extends Component {
 
   handleAnnotationChange = e => {
     e.persist();
-    this.setState(function(prevState) {
+    this.setState(prevState => {
       const { id, value } = e.target;
       const newInvalidFields = prevState.invalidFields;
       const idIndex = newInvalidFields.indexOf(id);
@@ -167,7 +167,7 @@ export /* istanbul ignore next */ class SecretsModal extends Component {
   };
 
   handleAdd = () => {
-    this.setState(function(prevState) {
+    this.setState(prevState => {
       if (prevState.serviceAccount.trim() !== '') {
         const { annotations, accessTo } = prevState;
         annotations.push(`tekton.dev/${accessTo}-${annotations.length / 2}`);
@@ -181,7 +181,7 @@ export /* istanbul ignore next */ class SecretsModal extends Component {
   };
 
   handleRemove = () => {
-    this.setState(function(prevState) {
+    this.setState(prevState => {
       if (prevState.serviceAccount.trim() !== '') {
         const { annotations } = prevState;
         if (annotations.length / 2 - 1 !== 0) {

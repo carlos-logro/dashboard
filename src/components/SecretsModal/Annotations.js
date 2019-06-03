@@ -13,8 +13,8 @@ limitations under the License.
 
 import React from 'react';
 import { TextInput } from 'carbon-components-react';
-import Add from '@carbon/icons-react/lib/add--alt/16';
-import Remove from '@carbon/icons-react/lib/close--outline/16';
+import Add from '@carbon/icons-react/lib/add--alt/24';
+import Remove from '@carbon/icons-react/lib/misuse/24';
 import './SecretsModal.scss';
 
 const Annotations = props => {
@@ -52,7 +52,7 @@ const Annotations = props => {
           labelText=""
           key={`annotation${i + 1}`}
           value={annotations[i + 1]}
-          placeholder=""
+          placeholder="https://domain.com"
           onChange={handleChange}
           invalid={invalidFields.indexOf(`annotation${i + 1}`) > -1}
           autoComplete="off"

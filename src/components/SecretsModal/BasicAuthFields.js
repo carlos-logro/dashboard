@@ -30,9 +30,9 @@ const BasicAuthFields = props => {
         id="username"
         data-testid="username"
         autoComplete="off"
+        placeholder="example@domain.com"
         value={username}
-        placeholder=""
-        labelText="Username:"
+        labelText="Email:"
         onChange={handleChange}
         invalid={invalidFields.indexOf('username') > -1}
         disabled={disabled}
@@ -44,7 +44,7 @@ const BasicAuthFields = props => {
         autoComplete="off"
         type="password"
         value={password}
-        placeholder=""
+        placeholder="********"
         labelText="Password/Token:"
         onChange={handleChange}
         invalid={invalidFields.indexOf('password') > -1}
@@ -59,7 +59,7 @@ const BasicAuthFields = props => {
         autoComplete="off"
         type="serviceAccount"
         value={serviceAccount}
-        placeholder=""
+        placeholder="default"
         labelText="Service Account:"
         onChange={handleChange}
         invalid={invalidFields.indexOf('serviceAccount') > -1}

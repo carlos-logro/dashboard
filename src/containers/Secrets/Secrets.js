@@ -43,7 +43,7 @@ export /* istanbul ignore next */ class Secrets extends Component {
   }
 
   handleNewSecretClick = () => {
-    this.setState(function(prevState) {
+    this.setState(prevState => {
       return {
         openNewSecret: !prevState.openNewSecret
       };
