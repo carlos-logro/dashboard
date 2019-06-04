@@ -36,7 +36,6 @@ it('SECRETS_FETCH_SUCCESS', () => {
   const secret = {
       name,
       uid,
-      type,
       annotations
   };
   const action = {
