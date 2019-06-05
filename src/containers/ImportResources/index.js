@@ -11,22 +11,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import '~carbon-components/scss/globals/scss/vars';
-
-.deleteModal {
-  p {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-  }
-
-  strong {
-    font-weight: bold;
-    color: $support-01;
-  }
-
-  .bx--modal-footer {
-    button {
-      font-size: 1.25rem;
-    }
-  }
-}
+export { default } from './ImportResources';

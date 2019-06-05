@@ -39,7 +39,8 @@ import {
   Tasks,
   TaskRuns,
   CustomResourceDefinition,
-  NamespacesDropdown
+  NamespacesDropdown,
+  ImportResources
 } from '..';
 
 import SideNavMenu from '../../components/SideNavMenu';
@@ -89,6 +90,13 @@ export /* istanbul ignore next */ class App extends Component {
                 <SideNavLink element={NavLink} icon={<span />} to="/tasks">
                   Tasks
                 </SideNavLink>
+                <SideNavLink
+                  element={NavLink}
+                  icon={<span />}
+                  to="/importresources"
+                >
+                  Import Tekton resources
+                </SideNavLink>
               </SideNavMenu>
               <NamespacesDropdown
                 titleText="Namespace"
@@ -131,6 +139,7 @@ export /* istanbul ignore next */ class App extends Component {
                 path="/pipelines/:pipelineName/runs/:pipelineRunName"
                 component={PipelineRun}
               />
+              <Route path="/importresources" component={ImportResources} />
               <Route path="/extensions" exact component={Extensions} />
               {extensions.map(({ displayName, name, source }) => (
                 <Route

@@ -35,14 +35,14 @@ it('Test SecretsDeleteModal click events', () => {
   const props = {
     open: true,
     id: 'dummySecret',
-    handleClick: handleClick,
-    handleDelete: handleDelete
+    handleClick,
+    handleDelete
   };
 
   const { queryByText, rerender } = render(<SecretsDeleteModal {...props} />);
   fireEvent.click(queryByText('Delete'));
   expect(handleDelete).toHaveBeenCalledTimes(1);
-  rerender(<SecretsDeleteModal open={false}/>)
+  rerender(<SecretsDeleteModal open={false} />);
   fireEvent.click(queryByText('Delete'));
   expect(handleClick).toHaveBeenCalledTimes(0);
 });
