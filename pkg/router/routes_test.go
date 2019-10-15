@@ -375,6 +375,7 @@ func TestExtensionRegistration(t *testing.T) {
 				Namespace: installNamespace,
 				UID:       types.UID(strconv.FormatInt(456+time.Now().UnixNano(), 10)),
 				Annotations: map[string]string{
+					ExtensionUrlKey:            extensionUrlValue,
 					ExtensionBundleLocationKey: "Location",
 					ExtensionDisplayNameKey:    "Display Name",
 				},
@@ -414,6 +415,7 @@ func TestExtensionRegistration(t *testing.T) {
 				Namespace: otherNamespace,
 				UID:       types.UID(strconv.FormatInt(789+time.Now().UnixNano(), 10)),
 				Annotations: map[string]string{
+					ExtensionUrlKey:            extensionUrlValue,
 					ExtensionBundleLocationKey: "Location",
 					ExtensionDisplayNameKey:    "Display Name",
 				},
